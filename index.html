@@ -3,55 +3,392 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>jkavanagh.dev</title>
+  <title>James Kavanagh - Tech Lead</title>
+  <meta name="description" content="James Kavanagh, Tech Lead. Backend engineering: horizontally scalable, high-availability distributed platforms on .NET, Java/Spring, Redis, Kafka and SQL Server." />
+  <meta name="author" content="James Kavanagh" />
   <meta name="color-scheme" content="light dark" />
+  <link rel="canonical" href="https://jkavanagh.dev/" />
+
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content="James Kavanagh - Tech Lead" />
+  <meta property="og:description" content="Backend engineering: horizontally scalable, high-availability distributed platforms." />
+  <meta property="og:url" content="https://jkavanagh.dev/" />
+  <meta name="twitter:card" content="summary" />
+
   <style>
     :root {
       --bg: #ffffff;
+      --surface: #f6f7f9;
       --fg: #111418;
       --muted: #5b6570;
+      --faint: #8a94a0;
+      --line: #e3e7ec;
+      --accent: #1f6feb;
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
         --bg: #0d1117;
+        --surface: #161b22;
         --fg: #e6edf3;
-        --muted: #8b949e;
+        --muted: #9aa5b1;
+        --faint: #6e7781;
+        --line: #232a33;
+        --accent: #58a6ff;
       }
     }
 
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
       background: var(--bg);
       color: var(--fg);
-      font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+      font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      -webkit-text-size-adjust: 100%;
     }
 
-    main {
-      text-align: center;
-      max-width: 32rem;
+    .wrap {
+      max-width: 46rem;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    a { color: var(--accent); }
+
+    header {
+      padding: clamp(3rem, 10vw, 6rem) 0 2.5rem;
+      border-bottom: 1px solid var(--line);
     }
 
     h1 {
-      margin: 0 0 0.5rem;
-      font-size: clamp(2rem, 8vw, 3rem);
-      letter-spacing: -0.02em;
+      margin: 0;
+      font-size: clamp(2rem, 7vw, 2.75rem);
+      letter-spacing: -0.025em;
+      line-height: 1.15;
     }
 
-    p {
-      margin: 0;
+    .role {
+      margin: 0.35rem 0 1rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .tagline {
+      margin: 0 0 1.75rem;
       color: var(--muted);
+      max-width: 34rem;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+      color: var(--fg);
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    section { padding: 2.75rem 0; border-bottom: 1px solid var(--line); }
+
+    h2 {
+      margin: 0 0 1.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+
+    .lead { margin: 0; color: var(--muted); }
+
+    .job { margin-bottom: 2.25rem; }
+    .job:last-child { margin-bottom: 0; }
+
+    .job-co { font-weight: 600; }
+
+    .job-meta {
+      margin: 0.1rem 0 1rem;
+      font-size: 0.875rem;
+      color: var(--faint);
+    }
+
+    .role-block { margin-bottom: 1.25rem; }
+    .role-block:last-child { margin-bottom: 0; }
+
+    .role-title { font-weight: 600; font-size: 0.95rem; }
+
+    .role-span {
+      font-size: 0.825rem;
+      color: var(--faint);
+      margin-bottom: 0.4rem;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+    }
+
+    li { margin-bottom: 0.3rem; }
+
+    .skills { display: grid; gap: 1.25rem; }
+
+    .skill h3 {
+      margin: 0 0 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    .tag {
+      padding: 0.2rem 0.6rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .edu-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0 0.5rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .edu-row:last-child { margin-bottom: 0; }
+    .edu-deg { font-weight: 600; }
+    .edu-school, .edu-year { color: var(--faint); font-size: 0.9rem; }
+
+    .contact { display: grid; gap: 0.75rem; }
+
+    .contact div { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+    .k { color: var(--faint); min-width: 5.5rem; font-size: 0.9rem; }
+
+    footer {
+      padding: 2rem 0 3rem;
+      color: var(--faint);
+      font-size: 0.85rem;
+    }
+
+    @media (min-width: 40rem) {
+      .skills { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Hello, world.</h1>
-    <p>jkavanagh.dev is under construction.</p>
-  </main>
+  <header>
+    <div class="wrap">
+      <h1>James Kavanagh</h1>
+      <p class="role">Tech Lead</p>
+      <p class="tagline">Cloud-ready backend engineering: horizontally scalable, high-availability distributed platforms.</p>
+      <div class="links">
+        <a class="btn" href="https://www.linkedin.com/in/jamesmkavanagh" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="mailto:james@jkavanagh.dev">Email</a>
+        <a class="btn" href="#contact">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="wrap">
+      <h2>About</h2>
+      <p class="lead">
+        I'm a Tech Lead with experience in backend development, specialising in horizontally
+        scalable, high-availability platforms built primarily on .NET, Redis, Kafka and SQL Server.
+        I guide engineering teams in defining specifications, domain models, performance-focused
+        APIs and fault-tolerant distributed services. My leadership centres on enabling
+        collaboration, setting clear technical direction, and ensuring architectural decisions keep
+        evolving with business requirements, aligning system design with long-term strategy while
+        holding a high bar for delivery across an international team.
+      </p>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <h2>Experience</h2>
+
+      <div class="job">
+        <div class="job-co">GBE Technologies / NYRA Tech</div>
+        <div class="job-meta">Yongin-si, South Korea &middot; Remote &middot; 2018 - Present</div>
+
+        <div class="role-block">
+          <div class="role-title">Tech Lead</div>
+          <div class="role-span">2025 - Present</div>
+          <ul>
+            <li>Designed high-availability asynchronous services within the Solution Architecture team.</li>
+            <li>Led technical decision-making and cross-stream collaboration between stakeholders, APAC engineering teams and shared services.</li>
+            <li>Guided the Platform Evolution team through a PoC integrating locally-hosted LLMs (Qwen / DeepSeek) to enable secure internal agent workflows.</li>
+            <li>Improved operational resilience through unified observability standards: structured logging, Prometheus, CI enforcement and Cloud Events.</li>
+            <li>Delivered a controlled content-management and integration framework for third-party vendors, reducing risk in non-single-source integrations.</li>
+            <li>Coordinated migration from TeamCity scheduled deployments to cloud-ready CI/CD pipelines via Azure DevOps and Docker.</li>
+          </ul>
+        </div>
+
+        <div class="role-block">
+          <div class="role-title">Senior Backend Developer</div>
+          <div class="role-span">2022 - 2024</div>
+          <ul>
+            <li>Designed and implemented user enrolment and identity-validation services across multiple regulatory jurisdictions.</li>
+            <li>Re-architected the backend platform for horizontal scalability, replacing singleton-bound logic with stateless distributed components.</li>
+            <li>Served as sole Java developer in APAC, maintaining and refactoring core Spring services supporting asynchronous client workflows.</li>
+            <li>Assisted with APAC team establishment and onboarding in Hanoi, Vietnam.</li>
+          </ul>
+        </div>
+
+        <div class="role-block">
+          <div class="role-title">Backend Developer</div>
+          <div class="role-span">2018 - 2022 &middot; Dublin, Ireland / Seoul, South Korea</div>
+          <ul>
+            <li>Supported exchange-service development and external partner integrations.</li>
+            <li>Maintained .NET applications and SQL Server environments within an international development team.</li>
+            <li>Developed Docker-based micro-applications and Azure web functions for automation and operational improvement.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-co">Trident Trust Fund Services</div>
+        <div class="job-meta">Yongin-si, South Korea &middot; Remote &middot; Freelance &middot; 2022 - 2023</div>
+        <div class="role-block">
+          <div class="role-title">Backend Developer</div>
+          <ul>
+            <li>Worked closely with a product manager in Malta to translate client requirements into delivery.</li>
+            <li>Developed custom SQL-backed portfolio reporting for stocks, cryptocurrency and mixed assets.</li>
+            <li>Implemented GDPR / PII compliance controls for investor reporting and regulatory visibility.</li>
+            <li>Provided ad-hoc development to enhance portfolio analytics, reporting workflows and compliance support.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-co">Custom House Global Fund Services</div>
+        <div class="job-meta">Dublin, Ireland &middot; 2016 - 2018</div>
+        <div class="role-block">
+          <div class="role-title">Full-Stack Developer</div>
+          <ul>
+            <li>Built financial and security reporting features using .NET and SQL Server.</li>
+            <li>Optimised reporting performance by designing custom SQL stored procedures for core business applications.</li>
+            <li>Developed automated reporting to support SOC 1 audit compliance and cut manual workload for the global Application Support team.</li>
+            <li>Redesigned Git / TFS workflows to improve version control, traceability and release stability; introduced Jira Service Desk to formalise change management.</li>
+            <li>Onboarded new development staff through technical training and documentation.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-co">Showoff</div>
+        <div class="job-meta">Wicklow, Ireland &middot; 2015</div>
+        <div class="role-block">
+          <div class="role-title">Android &amp; iOS Application Developer</div>
+          <ul>
+            <li>Developed an Android application for health and vaccination tracking.</li>
+            <li>Built an iOS group-payments app with early Apple Pay adoption, ahead of its Ireland launch.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-co">Stuart Insurances</div>
+        <div class="job-meta">Dublin, Ireland &middot; 2013 - 2014</div>
+        <div class="role-block">
+          <div class="role-title">Network &amp; Support Technician</div>
+          <ul>
+            <li>Maintained Active Directory / Exchange: user, account and mailbox management.</li>
+            <li>Assisted migration from Windows Server 2003 to 2012 and upgraded network infrastructure.</li>
+            <li>Handled remote troubleshooting and diagnostics.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <h2>Systems &amp; Capabilities</h2>
+      <div class="skills">
+        <div class="skill">
+          <h3>Backend &amp; Data</h3>
+          <div class="tags">
+            <span class="tag">.NET / C#</span><span class="tag">Java / Spring</span><span class="tag">Redis</span><span class="tag">Kafka</span><span class="tag">SQL Server</span>
+          </div>
+        </div>
+        <div class="skill">
+          <h3>Architecture</h3>
+          <div class="tags">
+            <span class="tag">High-availability</span><span class="tag">Horizontal scaling</span><span class="tag">Distributed systems</span><span class="tag">Stateless services</span><span class="tag">Domain modelling</span><span class="tag">Performance APIs</span>
+          </div>
+        </div>
+        <div class="skill">
+          <h3>Cloud &amp; Delivery</h3>
+          <div class="tags">
+            <span class="tag">Azure DevOps</span><span class="tag">Docker</span><span class="tag">CI/CD</span><span class="tag">Prometheus</span><span class="tag">Cloud Events</span><span class="tag">Structured logging</span>
+          </div>
+        </div>
+        <div class="skill">
+          <h3>Leadership</h3>
+          <div class="tags">
+            <span class="tag">Technical direction</span><span class="tag">Sprint planning</span><span class="tag">Cross-stream refinement</span><span class="tag">Onboarding</span>
+          </div>
+        </div>
+        <div class="skill">
+          <h3>Exploratory</h3>
+          <div class="tags">
+            <span class="tag">Local LLMs (Qwen / DeepSeek)</span><span class="tag">Secure agent workflows</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <h2>Education</h2>
+      <div class="edu-row">
+        <span class="edu-deg">B.Sc. Networking Applications &amp; Security</span>
+        <span class="edu-school">Technological University Dublin</span>
+        <span class="edu-year">2015</span>
+      </div>
+      <div class="edu-row">
+        <span class="edu-deg">Networking Technologies</span>
+        <span class="edu-school">Technological University Dublin</span>
+        <span class="edu-year">2014</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <div class="contact">
+        <div><span class="k">Email</span><a href="mailto:james@jkavanagh.dev">james@jkavanagh.dev</a></div>
+        <div><span class="k">LinkedIn</span><a href="https://www.linkedin.com/in/jamesmkavanagh" target="_blank" rel="noopener">/in/jamesmkavanagh</a></div>
+        <div><span class="k">Location</span><span>Yongin-si, South Korea</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">&copy; <span id="year">2026</span> James Kavanagh</div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
